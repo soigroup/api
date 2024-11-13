@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+
 import laravel from 'vite-plugin-laravel'; // تأكد من استيراد المكتبة
 
 export default defineConfig({
@@ -16,3 +17,4 @@ export default defineConfig({
         manifest: true, // تأكد من إنشاء manifest.json
     },
 });
+

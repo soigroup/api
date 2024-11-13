@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['*'],  // يجب أن يسمح بكل النطاقات
 
     'allowed_origins_patterns' => [],
 
