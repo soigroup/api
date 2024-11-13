@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     git \
     unzip \
     libzip-dev \
+    curl \
     && docker-php-ext-install zip
 
 # تثبيت Composer
@@ -19,16 +20,18 @@ WORKDIR /app
 # تثبيت الحزم باستخدام Composer
 RUN composer install --no-interaction --prefer-dist
 
-# إذا كنت بحاجة إلى npm، يمكنك تثبيته باستخدام هذه الخطوات:
-# تثبيت Node.js و npm
+# تأكد من تثبيت الحزم باستخدام npm
 RUN apt-get install -y curl && curl -sL https://deb.nodesource.com/setup_16.x | bash && apt-get install -y nodejs
-
-# تثبيت الحزم باستخدام npm (إذا كانت هناك حاجة لذلك)
 RUN npm install
+
+# تثبيت Vite إذا كنت بحاجة إلى بناء المشروع باستخدامه
+RUN php artisan vite:config
+
+# بناء التطبيق باستخدام Vite
 RUN npm run build
 
 # تحديد البورت الذي يستخدمه التطبيق
 EXPOSE 80
 
-# تنفيذ التطبيق (اختياري حسب احتياجاتك)
+# تنفيذ التطبيق
 CMD ["php", "-S", "0.0.0.0:80", "index.php"]
