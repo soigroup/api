@@ -24,8 +24,7 @@ RUN composer install --no-interaction --prefer-dist
 RUN apt-get install -y curl && curl -sL https://deb.nodesource.com/setup_16.x | bash && apt-get install -y nodejs
 RUN npm install
 
-# تثبيت Vite إذا كنت بحاجة إلى بناء المشروع باستخدامه
-RUN php artisan vite:config
+
 
 # بناء التطبيق باستخدام Vite
 RUN npm run build
