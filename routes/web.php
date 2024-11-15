@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +35,14 @@ Route::post('/daily-tasks', [AdminController::class, 'storeDailyTask'])->name('d
 Route::get('/daily-tasks/{dailyTask}/edit', [AdminController::class, 'editDailyTask'])->name('daily_tasks.edit');
 Route::patch('/daily-tasks/{dailyTask}', [AdminController::class, 'updateDailyTask'])->name('daily_tasks.update');
 Route::delete('/daily-tasks/{dailyTask}', [AdminController::class, 'deleteDailyTask'])->name('daily_tasks.delete');
-
+Route::get('/test-db', function () {
+    try {
+        // محاولة الاتصال بقاعدة البيانات
+        DB::connection()->getPdo();
+        return "تم الاتصال بقاعدة البيانات بنجاح!";
+    } catch (\Exception $e) {
+        return "فشل الاتصال بقاعدة البيانات: " . $e->getMessage();
+    }
+});
 // ملاحظة: تم إلغاء استيراد auth.php لأن المصادقة غير مطلوبة
 // require __DIR__.'/auth.php';
